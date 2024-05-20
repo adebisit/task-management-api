@@ -7,6 +7,10 @@ import { Public } from 'src/common/decorators/publicRoute';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  /**
+   * Create a new user
+   * @param createUserDto
+   */
   @Public()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {

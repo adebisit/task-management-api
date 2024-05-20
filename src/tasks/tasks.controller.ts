@@ -26,6 +26,10 @@ import { TaskOwnerGuard } from './tasks.guard';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
+  /**
+   * Create a new task for authenticated user
+   * @param dueAt @param createTaskDto
+   */
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   async create(
@@ -36,6 +40,10 @@ export class TasksController {
     return this.tasksService.create(createTaskDto, user.email);
   }
 
+  /**
+   * Restrieve all tasks owned by authenticated user
+   * @param query
+   */
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true }))
@@ -43,6 +51,11 @@ export class TasksController {
     return this.tasksService.findAll(query, user);
   }
 
+  /**
+   * Restrieve single task
+   * if not owned by authenticated user, returns unauthorized
+   * @param id
+   */
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   @UseGuards(TaskOwnerGuard)
@@ -50,12 +63,22 @@ export class TasksController {
     return this.tasksService.findOne(+id);
   }
 
+  /**
+   * Update single task
+   * if not owned by authenticated user, returns unauthorized
+   * @param id
+   */
   @Patch(':id')
   @UseGuards(TaskOwnerGuard)
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
     return this.tasksService.update(+id, updateTaskDto);
   }
 
+  /**
+   * Delete single task
+   * if not owned by authenticated user, returns unauthorized
+   * @param id
+   */
   @Delete(':id')
   @UseGuards(TaskOwnerGuard)
   remove(@Param('id') id: string) {

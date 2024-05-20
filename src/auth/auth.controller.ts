@@ -7,6 +7,10 @@ import { Public } from 'src/common/decorators/publicRoute';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * Login with user cerdentials
+   * @param userLoginDto
+   */
   @Public()
   @Post('login')
   login(@Body() userLoginDto: UserLoginDto) {

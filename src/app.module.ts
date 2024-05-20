@@ -6,20 +6,15 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { dataSourceOptions } from './data-source';
-import * as Joi from 'joi';
 import { JwtModule } from '@nestjs/jwt';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: Joi.object({
-        NODE_ENV: Joi.string()
-          .valid('development', 'production', 'test', 'provision')
-          .default('development'),
-        PORT: Joi.number().port().default(3000),
-      }),
     }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     JwtModule.registerAsync({
       global: true,
       imports: [ConfigModule],
@@ -31,7 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     AuthModule,
     UsersModule,
-    TypeOrmModule.forRoot(dataSourceOptions),
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
