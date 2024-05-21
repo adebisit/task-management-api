@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
 import { User } from 'src/users/entities/user.entity';
 import { TaskSubscriber } from './subscribers/task.subscriber';
+import { TasksGateway } from './tasks.gateway';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -16,6 +18,18 @@ import { TaskSubscriber } from './subscribers/task.subscriber';
     TypeOrmModule.forFeature([User]),
   ],
   controllers: [TasksController],
-  providers: [TasksService, TaskSubscriber],
+  providers: [
+    TasksService,
+    TasksGateway,
+    {
+      provide: 'TASK_SUBSCRIBER',
+      useFactory: (tasksGateway: TasksGateway, dataSource: DataSource) => {
+        const subscriber = new TaskSubscriber(tasksGateway);
+        dataSource.subscribers.push(subscriber);
+        return subscriber;
+      },
+      inject: [TasksGateway, DataSource],
+    },
+  ],
 })
 export class TasksModule {}

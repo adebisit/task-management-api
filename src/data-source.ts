@@ -2,7 +2,6 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { User } from './users/entities/user.entity';
 import { Task } from './tasks/entities/task.entity';
 import * as dotenv from 'dotenv';
-import { TaskSubscriber } from './tasks/subscribers/task.subscriber';
 
 dotenv.config();
 
@@ -16,10 +15,8 @@ export const dataSourceOptions: DataSourceOptions = {
   synchronize: false,
   logging: false,
   entities: [User, Task],
-  subscribers: [TaskSubscriber],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
 };
-console.log(dataSourceOptions);
 
 const AppDataSource = new DataSource(dataSourceOptions);
 export default AppDataSource;

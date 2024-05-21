@@ -72,7 +72,7 @@ The application will be available at http://localhost:3000.
 docker-compose down
 ```
 
-## Running Migrations
+## Running DB Migrations (Important)
 To run TypeORM migrations, use the following commands:
 
 Run migrations:
@@ -82,6 +82,16 @@ docker-compose exec api npx typeorm migration:run -d dist/data-source.js
 
 ## API Documentation
 Documentations for the API endpoints are available at http://localhost:3000/api/.
+
+### Websocket (WS)
+The application provides the capability to listen for real-time updates on the tasks database through WebSocket events. The following events are supported:
+
+1. `onTaskAdded`: Triggered when a new task is added to the database.
+2. `onTaskUpdated`: Triggered when an existing task is updated.
+3. `onTaskRemoved`: Triggered when a task is removed from the database.
+These events allow for seamless real-time updates, ensuring that all connected clients remain synchronized with the latest changes in the tasks database.
+
+You can test these with Postman as it supports socket.io requests
 
 ## Testing
 Test scripts are currently under development
