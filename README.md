@@ -46,7 +46,7 @@ o run this project, you will need to add the following environment variables to 
 | `DATABASE_PASSWORD`| The password for your database connection    | `password`               |
 | `DATABASE_NAME`    | The name of your database                    | `my_database`            |
 | `JWT_SECRET`       | Secret key for JWT token generation          | `your_jwt_secret_key`    |
-| `PORT_NUM`        |  The port number to run the NestJS application on |   3000 |
+| `APP_PORT`        |  The port number to run the NestJS application on |   3000 |
 
 ### Example .env File
 
@@ -57,7 +57,7 @@ DATABASE_USER=root
 DATABASE_PASSWORD=password
 DATABASE_NAME=my_database
 JWT_SECRET=your_jwt_secret_key
-PORT_NUM=3000
+APP_PORT=3000
 ```
 
 ## Running the Application
