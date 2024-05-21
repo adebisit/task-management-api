@@ -26,7 +26,7 @@ Before you begin, ensure you have the following installed:
 
    ```bash
    git clone https://github.com/adebisit/task-management-api
-   cd your-repo-name
+   cd task-management-api
    ```
 2. **Build Docker Image:**
    ```bash
