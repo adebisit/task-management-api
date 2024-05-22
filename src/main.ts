@@ -34,9 +34,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('api', app, document);
 
-  // const configService = app.get(ConfigService);
-  // const PORT = configService.get<number>('APP_PORT', 3000);
-  const PORT = process.env.PORT || 3000;
+  const configService = app.get(ConfigService);
+  const PORT = configService.get<number>('PORT', 3000);
+  // const PORT = process.env.PORT || 3000;
   await app.listen(PORT, () => {
     `Running API in MODE: ${process.env.NODE_ENV} on port ${PORT}`;
   });
