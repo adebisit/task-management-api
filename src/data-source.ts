@@ -17,6 +17,5 @@ export const dataSourceOptions: DataSourceOptions = {
   entities: [User, Task],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
 };
-console.log(dataSourceOptions)
 const AppDataSource = new DataSource(dataSourceOptions);
 export default AppDataSource;
